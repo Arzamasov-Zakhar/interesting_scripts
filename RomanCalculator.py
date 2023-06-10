@@ -1,9 +1,12 @@
+from TrueRomanNum import true_roman_num
+
 def translator(romannum: str) -> [int, str]:
     """Калькулятор перевода из римских чисел в арабские в десятичной СИ"""
     try:
         if type(romannum) is not str:
             raise TypeError
-
+        if not true_roman_num(romannum):
+            raise ValueError
         single_translator: dict = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
         subtractively: dict = {"II": 2, "IV": 4, "IX": 9, "XL": 40, "XC": 90, "CD": 400, "CM": 900}
         number: int = 0
@@ -32,5 +35,12 @@ def translator(romannum: str) -> [int, str]:
         return number
     except (KeyError, TypeError):
         return "Введите число, записанное римскими цифрами в формате 'MDCLXVI' "
+    except ValueError:
+        return """Проверьте правильность написания римских чисел: необходимо сначала 
+записать число тысяч, затем сотен, затем десятков и, наконец, единиц"""
+
+
+
+
 
 
